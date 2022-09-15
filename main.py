@@ -1,4 +1,3 @@
-from copy import copy
 from tkinter import *
 from tkinter import colorchooser
 from tkinter import filedialog
@@ -78,18 +77,6 @@ def change():
     hex_Color = color[1]
     text.config(bg=hex_Color)
 
-def openfile():
-    filepath = filedialog.askopenfile(title="Open to code")
-
-    file = open(filepath, 'w')
-
-    if len(int(file.read)) == 0:
-        print("no no")
-    else: 
-        text.get() == file.read()
-
-    file.close()
-
 window = Tk()
 
 menubar = Menu(window)
@@ -115,9 +102,11 @@ tools = Menu(menubar, tearoff=0)
 menubar.add_cascade(label="Tools", menu=tools)
 tools.add_command(label="Word Counter", command=counter)
 
+text = Text(window)
+text .grid(row=0, column=0, columnspan=4, sticky=N+S+W+E)
+window.grid_columnconfigure(0, weight=1)
+window.grid_rowconfigure(0, weight=1)
 
-text = Text(window, font=("Arial", 10))
-text.pack()
 
 
 
