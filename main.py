@@ -85,7 +85,7 @@ def openfile():
 
     if len(int(file.read)) == 0:
         print("no no")
-    else:
+    else: 
         text.get() == file.read()
 
     file.close()
@@ -120,8 +120,7 @@ text = Text(window, font=("Arial", 10))
 text.pack()
 
 
-open_file = Button(window, text="Open file", command=openfile)
-open_file.pack()
+
 
 window.mainloop()
 window.title()
