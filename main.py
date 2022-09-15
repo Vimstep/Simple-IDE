@@ -2,13 +2,35 @@ from copy import copy
 from tkinter import *
 from tkinter import colorchooser
 from tkinter import filedialog
+from tkinter.messagebox import showinfo
 import pyautogui
+
+def open_file():
+    filetypes = (
+        ('text files', '*.txt'),
+        ('All files', '*.*')
+    )
+
+    f = filedialog.askopenfile(filetypes=filetypes)
+    # read the text file and show its content on the Text
+        
+
+    text.insert('1.0', f.readlines())
 
 def copy():
     pyautogui.hotkey('ctrl', 'c')
 
 def paste():
     pyautogui.hotkey('ctrl', 'v')
+
+
+def save_file():
+    f = filedialog.asksaveasfile(mode='w', defaultextension=".txt")
+    if f is None: # asksaveasfile return `None` if dialog closed with "cancel".
+        return
+    text2save = str(text.get(1.0, END)) # starts from `1.0`, not `0.0`
+    f.write(text2save)
+    f.close() # `()` was missing.
 
 def counter():
     root = Tk()
@@ -73,8 +95,10 @@ window = Tk()
 menubar = Menu(window)
 window.config(menu=menubar)
 
-fileMenu = Menu(menubar)
+fileMenu = Menu(menubar, tearoff=0)
 menubar.add_cascade(label="File", menu=fileMenu)
+fileMenu.add_command(label="Save", command=save_file)
+fileMenu.add_command(label="Open", command=open_file)
 
 
 editMenu = Menu(menubar, tearoff=0)
